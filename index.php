@@ -2,7 +2,6 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-use GuzzleHttp\Client;
 
 require 'vendor/autoload.php';
 $mail = new PHPMailer(true);
@@ -27,7 +26,7 @@ try {
     $mail->Subject = 'CSP Report for *.bienlab.com';
     $mail->Body    = prettyPrint($raw);
     $mail->send();
-    slacksend(prettyPrint($raw));
+//    slacksend(prettyPrint($raw));
 
    echo "Message has been sent. \n";
 } catch (Exception $e) {
@@ -96,7 +95,7 @@ $client = new GuzzleHttp\Client();
 
 $response = $client->request(
     'POST',
-    'https://hooks.slack.com/services/ratbimat/khongnoidau'
+    'https://hooks.slack.com/services/ratbimat/khongnoidau',
     [
         'json' => [
             'type' => 'mrkdwn',
